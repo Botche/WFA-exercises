@@ -2,12 +2,16 @@
 {
 	using System;
 
+	using OOP_Introduction;
+
 	class StartUp
 	{
 		const string LINE_SEPARATOR = "====================================";
 
 		static void Main(string[] args)
 		{
+			Child child = new Child("Pesho");
+
 			int countOfNumbers = ReadIntegerFromConsole();
 
 			int[] result = CalculateOddEvenSumForNumbers(countOfNumbers);
