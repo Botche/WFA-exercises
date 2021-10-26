@@ -1,5 +1,4 @@
-﻿
-namespace SimpleWFAProject
+﻿namespace SimpleWFAProject
 {
 	partial class CustomersName
 	{
@@ -34,12 +33,14 @@ namespace SimpleWFAProject
 			this.lstNames = new System.Windows.Forms.ListBox();
 			this.btnClear = new System.Windows.Forms.Button();
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.btnEditName = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnAddName
 			// 
-			this.btnAddName.Cursor = System.Windows.Forms.Cursors.Arrow;
-			this.btnAddName.Location = new System.Drawing.Point(300, 142);
+			this.btnAddName.Cursor = System.Windows.Forms.Cursors.Default;
+			this.btnAddName.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.btnAddName.Location = new System.Drawing.Point(300, 133);
 			this.btnAddName.Name = "btnAddName";
 			this.btnAddName.Size = new System.Drawing.Size(120, 34);
 			this.btnAddName.TabIndex = 0;
@@ -64,10 +65,11 @@ namespace SimpleWFAProject
 			this.lstNames.Name = "lstNames";
 			this.lstNames.Size = new System.Drawing.Size(120, 124);
 			this.lstNames.TabIndex = 2;
+			this.lstNames.DoubleClick += new System.EventHandler(this.lstNames_DoubleClick);
 			// 
 			// btnClear
 			// 
-			this.btnClear.Location = new System.Drawing.Point(300, 192);
+			this.btnClear.Location = new System.Drawing.Point(300, 215);
 			this.btnClear.Name = "btnClear";
 			this.btnClear.Size = new System.Drawing.Size(120, 36);
 			this.btnClear.TabIndex = 3;
@@ -85,18 +87,31 @@ namespace SimpleWFAProject
 			this.checkBox1.Text = "checkBox1";
 			this.checkBox1.UseVisualStyleBackColor = true;
 			// 
+			// btnEditName
+			// 
+			this.btnEditName.Location = new System.Drawing.Point(300, 173);
+			this.btnEditName.Name = "btnEditName";
+			this.btnEditName.Size = new System.Drawing.Size(120, 36);
+			this.btnEditName.TabIndex = 5;
+			this.btnEditName.Text = "Edit Name";
+			this.btnEditName.UseVisualStyleBackColor = true;
+			this.btnEditName.Click += new System.EventHandler(this.btnEditName_Click);
+			// 
 			// CustomersName
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(539, 365);
+			this.ClientSize = new System.Drawing.Size(534, 361);
+			this.Controls.Add(this.btnEditName);
 			this.Controls.Add(this.checkBox1);
 			this.Controls.Add(this.btnClear);
 			this.Controls.Add(this.lstNames);
 			this.Controls.Add(this.txtName);
 			this.Controls.Add(this.btnAddName);
+			this.MinimumSize = new System.Drawing.Size(550, 400);
 			this.Name = "CustomersName";
 			this.Text = "Customers Name";
+			this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
 			this.Load += new System.EventHandler(this.CustomersName_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -110,6 +125,7 @@ namespace SimpleWFAProject
 		private System.Windows.Forms.ListBox lstNames;
 		private System.Windows.Forms.Button btnClear;
 		private System.Windows.Forms.CheckBox checkBox1;
+		private System.Windows.Forms.Button btnEditName;
 	}
 }
 

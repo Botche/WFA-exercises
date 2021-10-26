@@ -6,6 +6,10 @@ namespace SimpleWFAProject
 {
 	public partial class CustomersName : Form
 	{
+		private const string ERROR_MESSAGE_BOX_TITLE = "Close window";
+		private const string ERROR_MESSAGE_BOX_INVALID_NAME = "Invalid name!";
+		private const string ERROR_MESSAGE_BOX_DUPLICATE_NAME = "The name is already given!";
+
 		public CustomersName()
 		{
 			InitializeComponent();
@@ -33,13 +37,34 @@ namespace SimpleWFAProject
 
 		private void txtName_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if(e.KeyChar == (char)Keys.Enter)
+			if (e.KeyChar == (char)Keys.Enter)
 			{
 				this.AddNameToList();
 			}
 		}
 
-		private void AddNameToList()
+		private void lstNames_DoubleClick(object sender, EventArgs e)
+		{
+			this.txtName.Text = this.lstNames.SelectedItem.ToString();
+		}
+
+		private void btnEditName_Click(object sender, EventArgs e)
+		{
+			// string customerNameToEdit = this.lstName.SelectedItem.ToString(); -- same as the if block
+			string customerNameToEdit = "";
+			if (this.lstNames.SelectedItem != null)
+			{
+				customerNameToEdit = this.lstNames.SelectedItem.ToString();
+			}
+
+			bool result = this.AddNameToList();
+			if (result == true)
+			{
+				this.lstNames.Items.Remove(customerNameToEdit);
+			}
+		}
+
+		private bool AddNameToList()
 		{
 			string customerName = this.txtName.Text;
 			this.txtName.Clear();
@@ -47,15 +72,21 @@ namespace SimpleWFAProject
 			if (String.IsNullOrWhiteSpace(customerName)
 				|| customerName.All(char.IsLetter) == false)
 			{
-				string message = "Wrong name!";
-				string title = "Close Window";
+				MessageBox.Show(ERROR_MESSAGE_BOX_INVALID_NAME, ERROR_MESSAGE_BOX_TITLE);
 
-				MessageBox.Show(message, title);
+				return false;
+			}
 
-				return;
+			if (this.lstNames.Items.Contains(customerName) == true)
+			{
+				MessageBox.Show(ERROR_MESSAGE_BOX_DUPLICATE_NAME, ERROR_MESSAGE_BOX_TITLE);
+
+				return false;
 			}
 
 			this.lstNames.Items.Add(customerName);
+
+			return true;
 		}
 	}
 }
