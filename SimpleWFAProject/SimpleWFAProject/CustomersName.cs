@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -10,6 +12,8 @@ namespace SimpleWFAProject
 		private const string ERROR_MESSAGE_BOX_INVALID_NAME = "Invalid name!";
 		private const string ERROR_MESSAGE_BOX_DUPLICATE_NAME = "The name is already given!";
 
+		private const string CUSTOMERS_NAME_FILE_PATH = @"./../../../CustomersName.txt";
+
 		public CustomersName()
 		{
 			InitializeComponent();
@@ -17,6 +21,7 @@ namespace SimpleWFAProject
 
 		private void CustomersName_Load(object sender, EventArgs e)
 		{
+			this.ReadAllCustomersNameFromFile();
 			this.txtName.Select();
 		}
 
@@ -28,6 +33,7 @@ namespace SimpleWFAProject
 		private void btnClear_Click(object sender, EventArgs e)
 		{
 			this.lstNames.Items.Clear();
+			this.ClearCustomersNameFromFile();
 		}
 
 		private void txtName_TextChanged(object sender, EventArgs e)
@@ -61,6 +67,7 @@ namespace SimpleWFAProject
 			if (result == true)
 			{
 				this.lstNames.Items.Remove(customerNameToEdit);
+				this.RemoveCustomerNameFromFile(customerNameToEdit);
 			}
 		}
 
@@ -85,8 +92,60 @@ namespace SimpleWFAProject
 			}
 
 			this.lstNames.Items.Add(customerName);
+			this.AddCustomerNameToFile(customerName);
 
 			return true;
+		}
+
+		private async void ReadAllCustomersNameFromFile()
+		{
+			using (StreamReader streamReader = new StreamReader(CUSTOMERS_NAME_FILE_PATH))
+			{
+				string customerName = String.Empty;
+				while ((customerName = await streamReader.ReadLineAsync()) != null)
+				{
+					this.lstNames.Items.Add(customerName);
+				}
+			}
+		}
+
+		private async void AddCustomerNameToFile(string customerName)
+		{
+			List<string> customersName = (await File.ReadAllLinesAsync(CUSTOMERS_NAME_FILE_PATH)).ToList();
+			customersName.Add(customerName);
+
+			using (StreamWriter streamWriter = new StreamWriter(CUSTOMERS_NAME_FILE_PATH))
+			{
+				string result = string.Join('\n', customersName);
+
+				await streamWriter.WriteLineAsync(result);
+			}
+		}
+
+		private void ClearCustomersNameFromFile()
+		{
+			File.WriteAllText(CUSTOMERS_NAME_FILE_PATH, String.Empty);
+		}
+		 
+		private async void RemoveCustomerNameFromFile(string customerName)
+		{
+			List<string> customersName = new List<string>();
+
+			using (StreamReader streamReader = new StreamReader(CUSTOMERS_NAME_FILE_PATH))
+			{
+				string customerNameFromFile = String.Empty;
+				while ((customerNameFromFile = await streamReader.ReadLineAsync()) != null)
+				{
+					if (customerNameFromFile == customerName)
+					{
+						continue;
+					}
+
+					customersName.Add(customerNameFromFile);
+				}
+			}
+
+			File.WriteAllLines(CUSTOMERS_NAME_FILE_PATH, customersName);
 		}
 	}
 }
