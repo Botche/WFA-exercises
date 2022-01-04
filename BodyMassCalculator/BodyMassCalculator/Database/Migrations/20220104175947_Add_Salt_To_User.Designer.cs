@@ -4,14 +4,16 @@ using BodyMassCalculator.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BodyMassCalculator.Migrations
 {
     [DbContext(typeof(BodyMassCalculatorDbContext))]
-    partial class BodyMassCalculatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220104175947_Add_Salt_To_User")]
+    partial class Add_Salt_To_User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

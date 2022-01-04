@@ -25,6 +25,9 @@
 		[Required]
 		public string PasswordHash { get; set; }
 
+		[Required]
+		public string Salt { get; set; }
+
 		public DateTime CreatedAt { get; set; }
 
 		[Required]
