@@ -10,6 +10,7 @@
 
 		static void Main(string[] args)
 		{
+			// Class Child who is commming from another project 
 			Child child = new Child("Pesho");
 
 			int countOfNumbers = ReadIntegerFromConsole();

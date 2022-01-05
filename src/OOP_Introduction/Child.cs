@@ -1,5 +1,6 @@
 ﻿namespace OOP_Introduction
 {
+	// Child class of Person
 	public class Child : Person
 	{
 		public Child(string name)

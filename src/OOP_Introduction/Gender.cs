@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OOP_Introduction
+﻿namespace OOP_Introduction
 {
+	// This is value type class that has values represented as numbers
+	// https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum
 	public enum Gender
 	{
 		Undefined = 2,
