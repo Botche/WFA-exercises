@@ -27,6 +27,14 @@ namespace BodyMassCalculator
 			this.dbContext = dbContext;
 		}
 
+		protected async override void OnClosed(EventArgs e)
+		{
+			base.OnClosed(e);
+
+			await this.dbContext.DisposeAsync();
+			this.Close();
+		}
+
 		private async void RegisterButton_Click(object sender, EventArgs e)
 		{
 			string username = this.UsernameTextBox.Text;
@@ -83,6 +91,12 @@ namespace BodyMassCalculator
 			LoginForm loginForm = new LoginForm(dbContext);
 			loginForm.Show();
 			Hide();
+		}
+
+		private void RegisterForm_Load(object sender, EventArgs e)
+		{
+			this.PasswordTextBox.PasswordChar = '*';
+			this.RepeatPasswordTextBox.PasswordChar = '*';
 		}
 	}
 }

@@ -31,6 +31,7 @@ namespace BodyMassCalculator
 			base.OnClosed(e);
 
 			await this.dbContext.DisposeAsync();
+			this.Close();
 		}
 
 		private void LoginButton_Click(object sender, EventArgs e)
@@ -56,7 +57,7 @@ namespace BodyMassCalculator
 				return;
 			}
 
-			CalculatorFrom calculatorForm = new CalculatorFrom(dbContext);
+			CalculatorFrom calculatorForm = new CalculatorFrom(dbContext, user.Id);
 			calculatorForm.Show();
 			Hide();
 		}
@@ -66,6 +67,11 @@ namespace BodyMassCalculator
 			RegisterForm registerForm = new RegisterForm(dbContext);
 			registerForm.Show();
 			Hide();
+		}
+
+		private void LoginForm_Load(object sender, EventArgs e)
+		{
+			this.PasswordTextBox.PasswordChar = '*';
 		}
 	}
 }
