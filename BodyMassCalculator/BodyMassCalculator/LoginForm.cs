@@ -48,6 +48,14 @@ namespace BodyMassCalculator
 
 			User user = dbContext.Users
 				.SingleOrDefault(u => u.Username == username);
+
+			if (user == null)
+			{
+				MessageBox.Show("Incorrect credenials");
+
+				return;
+			}
+
 			string hashedPassword = PasswordManager.HashPassword(password, user.Salt);
 
 			if (hashedPassword != user.PasswordHash)
